@@ -25,6 +25,7 @@ resource "aws_iam_role" "profile_faker_function_role" {
   name = "profile-faker-${var.env_name}"
 
   assume_role_policy = jsonencode({
+    Version   = "2008-10-17"
     Statement = [
       {
         Action = "sts:AssumeRole"
@@ -35,4 +36,14 @@ resource "aws_iam_role" "profile_faker_function_role" {
       },
     ]
   })
+}
+
+resource "aws_lambda_function_url" "lambda_function_url" {
+  function_name      = aws_lambda_function.profile_faker_function.arn
+  authorization_type = "NONE"
+}
+
+output "function_url" {
+  description = "Function URL."
+  value       = aws_lambda_function_url.lambda_function_url.function_url
 }
