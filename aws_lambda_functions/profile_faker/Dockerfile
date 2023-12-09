@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/python:3.9
+FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.9
 
 # Install the function's dependencies using file requirements.txt
 # from your project folder.
